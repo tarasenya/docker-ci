@@ -1,0 +1,22 @@
+services:
+  identidock:
+    build: .
+    ports:
+      - "9090"
+    environment:
+      - ENV=DEV
+    networks:
+      - myapp-network
+    depends_on:
+      - dnmonster
+  
+  dnmonster:
+    image: amouat/dnmonster
+    networks:
+      - myapp-network
+  redis:
+    image: redis
+    networks:
+      - myapp-network 
+networks:
+  myapp-network:
